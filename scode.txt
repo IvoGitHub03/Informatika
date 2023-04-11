@@ -1,0 +1,91 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main() {
+	printf("Da se sustavi programa za obrabotka na dva masiva A[N,N] i B[N,N], kudeto dannite sa celi chisla v intervala\n [-1000;1000].\n");
+	printf("-Da se obrazuva ednomeren masiv C[N], elementite na koito da se obrazuvat kato suma ot suotvetnite elementi po glavnite diagonali na masivite A i B\n");
+	printf("-Poluchenia masiv da se sortira po golemina;\n");
+	printf("Avtor:Ivailo Mitev \n");
+	const int  MAX_N = 10;
+	int a[MAX_N][MAX_N], b[MAX_N][MAX_N], c[MAX_N];
+	int n, i, j;
+	printf("Vavedete goleminata na masivite A i B(do %d elementa): ", MAX_N);
+	scanf_s("%d", &n);
+	while (n > MAX_N) {
+		printf("Maksimalniqt razmer e 10 elementa\n");
+		printf("Vuvedete otnovo: ");
+		scanf_s("%d", &n);
+	}
+
+	printf("Vavedete elementite na masiv A: ");
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < n; j++) {
+			int temp;
+			scanf_s("%d", &temp);
+			while (temp < -1000 || temp > 1000) {
+				printf("Vavedenoto chislo e izvan intervala [-1000;1000].\n");
+				printf("Vuvedete otnovo: ");
+				scanf_s("%d", &temp);
+			}
+			a[i][j] = temp;
+		}
+	}
+
+	printf("Vavedete elementite na masiv B: ");
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < n; j++) {
+			int temp;
+			scanf_s("%d", &temp);
+			while (temp < -1000 || temp > 1000) {
+				printf("Vavedenoto chislo e izvan intervala [-1000;1000].\n");
+				printf("Vuvedete otnovo: ");
+				scanf_s("%d", &temp);
+			}
+			b[i][j] = temp;
+		}
+	}
+	//извеждане на входни данни
+	printf("Izvezhdane na elementite na masiv A: \n");
+	for (i = 0;i < n;i++) {
+		for (j = 0;j < n;j++)
+			printf("%d ", a[i][j]);
+		printf("\n");
+	}
+	printf("Izvezhdane na elementite na masiv B: \n");
+	for (i = 0;i < n;i++) {
+		for (j = 0;j < n;j++)
+			printf("%d ", b[i][j]);
+		printf("\n");
+	}
+
+
+		// Формиране на масива C като сума на елементите по главните диагонали на А и В
+		for (i = 0; i < n; i++) {
+			c[i] = a[i][i] + b[i][i];
+		}
+		//Извеждане на масив C преди обработката
+		printf("Izvezhdane na elementite ot masiv C predi obrabotkata : \n");
+		for (i = 0; i < n; i++) {
+			printf("%d ", c[i]);
+			printf("\n");
+		}
+
+		// Сортиране на масива C по метода на мехурчето
+		for (i = 0; i < n - 1; i++) {
+			for (j = i + 1; j < n; j++) {
+				if (c[i] > c[j]) {
+					int temp = c[i];
+					c[i] = c[j];
+					c[j] = temp;
+				}
+			}
+		}
+		//Извеждане на елементите на масив C след обработката
+		printf("Izvezhdane na elementite ot masiv C sled obrabotkata : \n");
+		for (i = 0;i < n;i++) {
+			printf("%d ", c[i]);
+			printf("\n");
+		}
+		system("pause");
+		return 0;
+	}
+
